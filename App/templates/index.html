@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: mediumseagreen;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+        }
+
+        header, footer {
+            height: 50px; 
+            width: 100%;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .container, .info-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 360px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: #ffffff;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        select, input[type="submit"] {
+            width: 80%;
+            padding: 10px;
+            margin: 5px auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            display: block;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .info-box {
+            font-size: 14px;
+            text-align: left; /
+        }
+
+        .info-box ul {
+            padding-left: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <header></header> 
+    <div class="main-content">
+        <h1>Enter Prediction Data</h1>
+        
+        <div class="container">
+            <form method="post">
+                Score Difference: <select name="Score_diff">
+                    <option value="0">Level</option>
+                    {% for diff in range(-10, 0) %}
+                        <option value="{{ diff }}">Losing by {{ -diff }}</option>
+                    {% endfor %}
+                    {% for diff in range(1, 11) %}
+                        <option value="{{ diff }}">Winning by {{ diff }}</option>
+                    {% endfor %}
+                </select><br><br>
+                Lead Change Since Last Dublin Kickout: <select name="Score_diff_change" value="0" min="-10" max="10">
+                    <option value="0">No Change</option>
+                    {% for diff in range(-5, 0) %}
+                        <option value="{{ diff }}">Decreased by {{ -diff }}</option>
+                    {% endfor %}
+                    {% for diff in range(1, 6) %}
+                        <option value="{{ diff }}">Increased by {{ diff }}</option>
+                    {% endfor %}
+                </select><br><br>
+                Last Play: <select name="LastPlay">
+                    <option value="Wide">Wide</option>
+                    <option value="Point">Point</option>
+                    <option value="Goal">Goal</option>
+                </select><br><br>
+                Press: <select name="Press">
+                    <option value="High">High</option>
+                    <option value="Mid">Medium</option>
+                    <option value="Low">Low</option>
+                </select><br><br>
+                Match Quarter: <select name="MatchQuarter">
+                    <option value="Q1">Q1</option>
+                    <option value="Q2">Q2</option>
+                    <option value="Q3">Q3</option>
+                    <option value="Q4">Q4</option>
+                </select><br><br>
+                <input type="submit" value="Predict!">
+            </form>
+        </div>
+    <div class="info-box">
+        <h3>Instructions:</h3>
+        <ul>
+            <li>The factors are from the perspective of the team taking the kickout. </li>
+            <li>Adjust inputs to test different scenarios.</li>
+        </ul>
+    </div>
+    <footer></footer>
+</body>
+</html>
